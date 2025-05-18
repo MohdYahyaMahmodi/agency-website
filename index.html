@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mahmodi - Web Development Agency</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+
+    <!-- Google Fonts - Inter for modern typography -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- GSAP for smooth animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+      /* ==========================================
+           GLOBAL RESET & BASE STYLES
+        ========================================== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        height: 100vh;
+        overflow: hidden;
+        background: #000000;
+        position: relative;
+        color: #ffffff;
+        transition: background-color 0.8s ease, color 0.8s ease;
+      }
+
+      /* ==========================================
+           HEADER STYLES
+        ========================================== */
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 25px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+        backdrop-filter: blur(20px);
+        background: rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .logo {
+        font-weight: 900;
+        font-size: 20px;
+        letter-spacing: -0.02em;
+        padding: 10px 20px;
+        border: 2px solid currentColor;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+
+      .logo:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      }
+
+      .nav {
+        display: flex;
+        gap: 40px;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .nav span {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 8px 16px;
+        border-radius: 25px;
+        position: relative;
+      }
+
+      .nav span:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .tagline {
+        font-size: 14px;
+        font-weight: 500;
+        text-align: right;
+        line-height: 1.3;
+        letter-spacing: 0.05em;
+        opacity: 0.9;
+      }
+
+      /* ==========================================
+           MAIN TEXT STYLES
+        ========================================== */
+      .main-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 10;
+      }
+
+      .word {
+        font-size: clamp(70px, 12vw, 180px);
+        font-weight: 900;
+        line-height: 0.85;
+        display: block;
+        letter-spacing: -0.03em;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .top-word {
+        margin-bottom: 15px;
+      }
+
+      .bottom-word {
+        margin-top: 15px;
+      }
+
+      /* ==========================================
+           FOOTER STYLES
+        ========================================== */
+      .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 25px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        z-index: 100;
+        backdrop-filter: blur(20px);
+        background: rgba(255, 255, 255, 0.05);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .description {
+        max-width: 60%;
+        line-height: 1.5;
+        font-weight: 400;
+        opacity: 0.9;
+      }
+
+      .time-display {
+        font-family: "Inter", monospace;
+        font-weight: 700;
+        font-size: 15px;
+        letter-spacing: 0.1em;
+        opacity: 0.95;
+      }
+
+      /* ==========================================
+           MOUSE TRAIL IMAGE STYLES
+        ========================================== */
+      .trail-image {
+        position: absolute;
+        max-width: 275px;
+        max-height: 275px;
+        width: auto;
+        height: auto;
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0.9;
+      }
+
+      /* ==========================================
+           RESPONSIVE DESIGN
+        ========================================== */
+
+      /* Tablet */
+      @media (max-width: 768px) {
+        .header {
+          padding: 20px 25px;
+          flex-direction: column;
+          gap: 15px;
+          text-align: center;
+        }
+
+        .nav {
+          gap: 20px;
+          font-size: 14px;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .footer {
+          padding: 20px 25px;
+          flex-direction: column;
+          gap: 15px;
+          text-align: center;
+        }
+
+        .description {
+          max-width: 100%;
+          font-size: 13px;
+        }
+
+        .word {
+          font-size: clamp(50px, 15vw, 120px);
+        }
+
+        .logo {
+          font-size: 18px;
+        }
+
+        .tagline {
+          font-size: 12px;
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 480px) {
+        .header {
+          padding: 15px 20px;
+        }
+
+        .footer {
+          padding: 15px 20px;
+        }
+
+        .nav {
+          gap: 15px;
+          font-size: 13px;
+        }
+
+        .word {
+          font-size: clamp(40px, 18vw, 100px);
+        }
+      }
+
+      /* ==========================================
+           SMOOTH TRANSITIONS
+        ========================================== */
+      .header,
+      .footer,
+      .nav span,
+      .logo {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Enhanced mobile touch targets */
+      @media (hover: none) and (pointer: coarse) {
+        .nav span {
+          padding: 12px 20px;
+          min-height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ==========================================
+         HEADER SECTION
+    ========================================== -->
+    <header class="header">
+      <div class="logo">MAHMODI</div>
+      <nav class="nav">
+        <span>Portfolio</span>
+        <span>Services</span>
+        <span>About</span>
+        <span>Process</span>
+        <span>Contact</span>
+      </nav>
+      <div class="tagline">DIGITAL ARCHITECTS<br />& CODE ARTISTS</div>
+    </header>
+
+    <!-- ==========================================
+         MAIN CONTENT SECTION
+    ========================================== -->
+    <main class="main-text">
+      <div class="word top-word" id="topWord">BUILD</div>
+      <div class="word bottom-word" id="bottomWord">DIGITAL</div>
+    </main>
+
+    <!-- ==========================================
+         FOOTER SECTION
+    ========================================== -->
+    <footer class="footer">
+      <div class="description">
+        Crafting exceptional digital experiences through innovative web
+        development and creative design solutions
+      </div>
+      <div class="time-display" id="timeDisplay">SAN FRANCISCO CA</div>
+    </footer>
+
+    <script>
+      /* ==========================================
+           CONFIGURATION CONSTANTS
+        ========================================== */
+
+      // Word pairs that cycle through the main text
+      const WORD_PAIRS = [
+        ["BUILD", "DIGITAL"],
+        ["CREATE", "WEBSITES"],
+        ["DESIGN", "FUTURES"],
+        ["CODE", "DREAMS"],
+        ["CRAFT", "SOLUTIONS"],
+        ["SHAPE", "IDEAS"],
+        ["MAKE", "MODERN"],
+        ["BUILD", "BRANDS"],
+        ["CREATE", "MAGIC"],
+        ["DESIGN", "BEAUTY"],
+        ["CODE", "STORIES"],
+        ["CRAFT", "AMAZING"],
+      ];
+
+      // Color palette that cycles through backgrounds
+      const COLOR_PALETTE = [
+        "#000000", // black (starting color)
+        "#ffb3b3", // pastel red
+        "#fffacd", // pastel yellow
+        "#87ceeb", // pastel blue
+        "#deb887", // pastel brown/tan
+        "#dda0dd", // pastel purple
+        "#ffcc99", // pastel orange
+        "#b0e0e6", // powder blue
+        "#f0e68c", // khaki
+        "#ffc0cb", // pastel pink
+      ];
+
+      // Animation and interaction settings
+      const SETTINGS = {
+        mouseThrottle: 35, // Milliseconds between image spawns
+        imageLifetime: 2000, // How long images stay visible (ms)
+        wordChangeInterval: 3000, // How often words change (ms)
+        timeUpdateInterval: 1000, // How often clock updates (ms)
+      };
+
+      /* ==========================================
+           GLOBAL STATE VARIABLES
+        ========================================== */
+
+      let imageUrls = []; // Array of image URLs loaded from JSON
+      let currentPairIndex = 0; // Current word pair index
+      let currentColorIndex = 0; // Current color index
+      let lastMouseMove = 0; // Timestamp of last mouse move
+      let isMobile = window.innerWidth <= 768 || "ontouchstart" in window;
+
+      /* ==========================================
+           DOM ELEMENT REFERENCES
+        ========================================== */
+
+      const bodyElement = document.body;
+      const topWordElement = document.getElementById("topWord");
+      const bottomWordElement = document.getElementById("bottomWord");
+      const timeDisplayElement = document.getElementById("timeDisplay");
+
+      /* ==========================================
+           UTILITY FUNCTIONS
+        ========================================== */
+
+      /**
+       * Detects if the device is mobile/tablet
+       * @returns {boolean} True if mobile device
+       */
+      function detectMobile() {
+        return window.innerWidth <= 768 || "ontouchstart" in window;
+      }
+
+      /**
+       * Determines appropriate text color based on background color
+       * @param {string} backgroundColor - Hex color code
+       * @returns {string} Appropriate text color (white or black)
+       */
+      function getTextColor(backgroundColor) {
+        // For black and dark colors, use white text
+        if (backgroundColor === "#000000" || backgroundColor === "#deb887") {
+          return "#ffffff";
+        }
+        // For all pastel colors, use black text
+        return "#000000";
+      }
+
+      /* ==========================================
+           CORE FUNCTIONALITY
+        ========================================== */
+
+      /**
+       * Loads image URLs from external JSON file
+       * Format: { "images": ["url1", "url2", ...] }
+       */
+      async function loadImages() {
+        try {
+          const response = await fetch("images.json");
+
+          if (response.ok) {
+            const data = await response.json();
+
+            if (
+              data.images &&
+              Array.isArray(data.images) &&
+              data.images.length > 0
+            ) {
+              imageUrls = data.images;
+              console.log(
+                `Successfully loaded ${imageUrls.length} images from images.json`
+              );
+            } else {
+              console.error("❌ Invalid images.json format or empty array");
+            }
+          } else {
+            console.error("❌ Failed to fetch images.json");
+          }
+        } catch (error) {
+          console.error("❌ Error loading images.json:", error);
+        }
+      }
+
+      /**
+       * Updates the time display in the footer
+       * Shows current time in San Francisco
+       */
+      function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString("en-US", {
+          hour12: false,
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        });
+        timeDisplayElement.textContent = `SAN FRANCISCO, CA ${timeString}`;
+      }
+
+      /**
+       * Handles the animated transition between word pairs and background colors
+       * Uses GSAP for smooth animations
+       */
+      function changeContent() {
+        // Animate out current words
+        gsap.to([topWordElement, bottomWordElement], {
+          opacity: 0,
+          y: (index) => (index === 0 ? -120 : 120),
+          rotation: (index) => (index === 0 ? -20 : 20),
+          scale: 0.6,
+          duration: 0.7,
+          ease: "power2.in",
+          onComplete: () => {
+            // Update to next word pair
+            currentPairIndex = (currentPairIndex + 1) % WORD_PAIRS.length;
+            const [newTopWord, newBottomWord] = WORD_PAIRS[currentPairIndex];
+            topWordElement.textContent = newTopWord;
+            bottomWordElement.textContent = newBottomWord;
+
+            // Change background color
+            currentColorIndex = (currentColorIndex + 1) % COLOR_PALETTE.length;
+            const newColor = COLOR_PALETTE[currentColorIndex];
+
+            // Animate background color change
+            gsap.to(bodyElement, {
+              backgroundColor: newColor,
+              duration: 1,
+              ease: "power2.out",
+            });
+
+            // Update text color based on new background
+            const textColor = getTextColor(newColor);
+            gsap.to(bodyElement, {
+              color: textColor,
+              duration: 1,
+              ease: "power2.out",
+            });
+
+            // Animate in new words
+            gsap.fromTo(
+              [topWordElement, bottomWordElement],
+              {
+                opacity: 0,
+                y: (index) => (index === 0 ? -140 : 140),
+                rotation: (index) => (index === 0 ? 25 : -25),
+                scale: 0.5,
+              },
+              {
+                opacity: 1,
+                y: 0,
+                rotation: 0,
+                scale: 1,
+                duration: 1.2,
+                ease: "back.out(1.5)",
+                stagger: 0.3,
+              }
+            );
+          },
+        });
+      }
+
+      /**
+       * Creates a trail image that follows the mouse cursor
+       * Images appear with random rotation and fade out after a delay
+       * @param {number} x - Mouse X coordinate
+       * @param {number} y - Mouse Y coordinate
+       */
+      function createTrailImage(x, y) {
+        // Skip if on mobile device
+        if (isMobile) return;
+
+        // Throttle image creation to prevent performance issues
+        const now = Date.now();
+        if (now - lastMouseMove < SETTINGS.mouseThrottle) return;
+        lastMouseMove = now;
+
+        // Skip if no images loaded
+        if (imageUrls.length === 0) return;
+
+        // Create image element
+        const img = document.createElement("img");
+        const randomImage =
+          imageUrls[Math.floor(Math.random() * imageUrls.length)];
+
+        img.src = randomImage;
+        img.className = "trail-image";
+
+        // Add to DOM first
+        bodyElement.appendChild(img);
+
+        // Position and style the image using GSAP
+        // This ensures all transforms work together properly
+        gsap.set(img, {
+          left: x, // X position
+          top: y, // Y position
+          xPercent: -50, // Center horizontally
+          yPercent: -50, // Center vertically
+          rotation: Math.random() * 360 - 180, // Random rotation
+          scale: 1, // No scaling
+          opacity: 0.9, // Visible immediately
+        });
+
+        // Remove image after specified lifetime
+        setTimeout(() => {
+          if (img.parentNode) {
+            img.parentNode.removeChild(img);
+          }
+        }, SETTINGS.imageLifetime);
+      }
+
+      /* ==========================================
+           EVENT LISTENERS
+        ========================================== */
+
+      // Mouse move event listener (desktop only)
+      if (!isMobile) {
+        document.addEventListener("mousemove", (e) => {
+          createTrailImage(e.clientX, e.clientY);
+        });
+      }
+
+      // Handle window resize to detect mobile/desktop changes
+      window.addEventListener("resize", () => {
+        isMobile = detectMobile();
+      });
+
+      // Prevent right-click context menu
+      document.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+      });
+
+      /* ==========================================
+           INITIALIZATION
+        ========================================== */
+
+      /**
+       * Main initialization function
+       * Sets up the application and starts all animations
+       */
+      async function initialize() {
+        console.log("Initializing Mahmodi website...");
+
+        // Load images from JSON file
+        await loadImages();
+
+        // Set initial state for main text words
+        gsap.set([topWordElement, bottomWordElement], {
+          opacity: 0,
+          y: (index) => (index === 0 ? -100 : 100),
+          scale: 0.7,
+        });
+
+        // Animate in the initial words with a staggered entrance
+        gsap.to([topWordElement, bottomWordElement], {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.5,
+          ease: "back.out(1.4)",
+          stagger: 0.4,
+          delay: 0.8,
+        });
+
+        // Start time updates
+        updateTime();
+        setInterval(updateTime, SETTINGS.timeUpdateInterval);
+
+        // Start automatic content changes
+        setInterval(changeContent, SETTINGS.wordChangeInterval);
+
+        console.log("Mahmodi website initialized successfully!");
+      }
+
+      /* ==========================================
+           APPLICATION START
+        ========================================== */
+
+      // Wait for DOM to be ready, then initialize
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initialize);
+      } else {
+        initialize();
+      }
+    </script>
+  </body>
+</html>
