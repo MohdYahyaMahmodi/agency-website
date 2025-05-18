@@ -5,7 +5,14 @@
   
   **A modern, interactive website showcasing dynamic animations and mouse-trail effects**
   
+  <br>
+
+[🔗 **Live Demo** →](https://mohdyahyamahmodi.github.io/agency-website/)
+
+  <br>
+  
   ![Website Screenshot](image.png)
+</div>
   
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   [![GSAP](https://img.shields.io/badge/GSAP-3.12.2-green.svg)](https://greensock.com/gsap/)
